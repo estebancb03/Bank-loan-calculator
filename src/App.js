@@ -2,11 +2,24 @@ import React, { Fragment, useState } from "react";
 import Header from "./components/Header";
 import Form from "./components/Form";
 import Message from "./components/Message";
+import Result from "./components/Result";
 
 function App() {
   const [amount, saveAmount] = useState(0);
   const [termToPay, saveTermToPay] = useState('');
   const [total, saveTotal] = useState(0); 
+
+  let component;
+  if(total === 0) {
+    component = <Message />
+  }
+  else {
+    component = <Result 
+                  total={ total }
+                  termToPay={ termToPay }
+                  amount={ amount }
+                />
+  }
 
   return (
     <Fragment>
@@ -23,7 +36,7 @@ function App() {
           saveTotal={ saveTotal }
         />
         <div className="messages">
-          <Message />
+          { component }
         </div>
       </div>
     </Fragment>
