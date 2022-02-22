@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { calculateTotal } from '../helpers';
 
 const Form = props => {
-    const { amount, saveAmount, termToPay, saveTermToPay, total, saveTotal } = props;
+    const { amount, saveAmount, termToPay, saveTermToPay, saveTotal,saveLoading } = props;
     const [error, saveError] = useState(false);
 
     const calculateLoan = e => {
@@ -11,9 +11,13 @@ const Form = props => {
             saveError(true);
             return;
         }
-        saveError(false); 
-        const total = calculateTotal(amount, termToPay);  
-        saveTotal(total);
+        saveError(false);
+        saveLoading(true);
+        setTimeout(() => {
+            const total = calculateTotal(amount, termToPay);  
+            saveTotal(total);
+            saveLoading(false);
+        }, 3000); 
     }
 
     return (  
