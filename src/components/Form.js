@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from 'react';
+import { calculateTotal } from '../helpers';
 
 const Form = props => {
     const { amount, saveAmount, termToPay, saveTermToPay } = props;
@@ -10,7 +11,9 @@ const Form = props => {
             saveError(true);
             return;
         }
-        saveError(false);   
+        saveError(false); 
+        const total = calculateTotal(amount, termToPay);  
+        console.log(total);
     }
 
     return (  
